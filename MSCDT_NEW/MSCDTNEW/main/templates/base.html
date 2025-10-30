@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Каледж Лічбавых Тэхналогій</title>
+            {% load static %}
+            <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+            
+            <script src="{% static 'main/scripts/images-scroller.js' %}"></script>
+
+        </head>
+
+        <body>
+
+            <div class="progress-bar" id="progress-bar"></div>
+                
+
+            <header>
+
+ 
+
+                <img src="{% static 'main/gifs/cube.gif' %}" class="logo">
+
+
+                    <ul class="main-menu">
+                        <li><a href="#schedule" data-i18n="schedule">Расклад</a></li>
+                        <li><a href="#announcements" data-i18n="announcements">Аб'явы</a></li>
+                        <li><a href="#news" data-i18n="news">Навіны</a></li>
+                    </ul>
+
+                    <div class="header-icons">
+                        <div class="icon search-icon" title="Поиск"></div>
+                        <div class="icon list-icon" title="Список"></div>
+                        <div class="icon glasses-icon" title="Версия для слабовидящих"></div>
+                    </div>
+
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="by">BY</button>
+                        <button class="lang-btn" data-lang="ru">RU</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="en">ZH</button>
+                    </div>
+
+            </header>
+            <div class="menu">
+                <ul class="sec-menu">
+                        <li><a href="#schedule" >Галоўная</a></li>
+                        <li><a href="#announcements" >Аб каледжы</a></li>
+                        <li><a href="#news">Абітурыянтам</a></li>
+                        <li><a href="#news">Выхаваўчая праца</a></li>
+                        <li><a href="#schedule" >Персаналіі</a></li>
+                        <li><a href="#announcements" >Праца з грамадзянамі</a></li>
+                        <li><a href="#news">Сэрвісы</a></li>
+                    </ul>
+
+            </div>
+           
+
+            <div class="college">
+                <div class="left-section">
+                    <h1 class="name" id="animatedText1">Мінскі Дзяржаўны</h1>
+                    <h1 class="name" id="animatedText2">Каледж Лічбавых Тэхналогій</h1>
+
+                    <div class="skip"></div>
+
+                    <h3 class="">вул. Казінца, 91<br>
+                                 вул. Кнорына, 14<br>
+                                +375 17 374 11 62</h3>
+                </div>
+                <div class="right-section">
+                    <div class="slider-container">
+                        <div class="slider-wrapper">
+                                <div class="slider">
+                                    <div class="slide">
+                                        <img src="{% static 'main/images/1.jpg' %}" alt="Изображение 1">
+                                    </div>
+                                    <div class="slide">
+                                        <img src="{% static 'main/images/2.png' %}" alt="Изображение 2">
+                                    </div>
+                                </div>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+
+            <div class="schedule-section" id="schedule">
+                <div class="schedule-block">
+                    <div class="container-schedule">
+                        <h1 class="sch">Расклад заняткаў</h1>
+
+                        <div class="pre-container">
+                            <div class="groups">
+                                Нумар групы
+
+                                <select name="group" class="dropdown">
+                                <option value="">Выберыце групу</option>
+                                {% for group in groups %}
+                                    <option value="{{ group.id }}" {% if selected_group == group.id %}selected{% endif %}>
+                                        {{ group.name }}
+                                    </option>
+                                {% endfor %}
+                                </select>
+
+                                <button type="submit" name="period" value="day" class="btn">На дзень</button>
+
+                                <button type="submit" name="period" value="week" class="btn">На тыдзень</button>
+
+                            </div>
+
+                            <div class="teachers">
+                                Прозвішча выкладчыка
+
+                                <select name="group" class="dropdown">
+                                <option value="">Выберыце выкладчыка</option>
+                                {% for group in groups %}
+                                    <option value="{{ group.id }}" {% if selected_group == group.id %}selected{% endif %}>
+                                        {{ group.name }}
+                                    </option>
+                                {% endfor %}
+                                </select>
+
+                                <button type="submit" name="period" value="day" class="btn">На дзень</button>
+
+                                <button type="submit" name="period" value="week" class="btn">На тыдзень</button>
+                            </div>
+
+                        </div>
+
+                        <button type="telegram" class="btn">Графік заняткаў у Telegram</button>
+
+                    </div>
+                </div>
+
+                {% if congratulation %}
+                <div class="congratulation-block">
+                    <div class="congratulation-container">
+                        <div class="congratulation-header">
+                            <h1>{{ congratulation.title }}</h1>
+                        </div>
+                        <div class="congratulation-content">
+                            <div class="text-section">
+                                <div class="congratulation-text">
+                                    {{ congratulation.poem_text|linebreaks }}
+                                </div>
+                                <div class="congratulation-footer">
+                                    {{ congratulation.employee_name }},<br>
+                                    {{ congratulation.employee_position }}
+                                </div>
+                            </div>
+                            <div class="image-section">
+                                {% if congratulation.employee_photo %}
+                                    <img src="{{ congratulation.employee_photo.url }}" alt="Фото сотрудника" class="director-photo">
+                                {% else %}
+                                    <div class="placeholder-photo">Фото не загружено</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            {% if events %}
+            <div class="events-section" id="announcements">
+                <div class="events-container">
+                    <h1 class="events-title">Анонс падзей і мерапрыемстваў</h1>
+                    <div class="events-block">
+                        {% for event in events %}
+                        <div class="event-card">
+                            <div class="event-logo">
+                                {% if event.logo %}
+                                    <img src="{{ event.logo.url }}" alt="{{ event.organization }}" class="event-logo-img">
+                                {% else %}
+                                    <div class="event-logo-placeholder">
+                                        <div class="logo-shape orange"></div>
+                                        <div class="logo-shape blue"></div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="event-content">
+                                <h3 class="event-organization">{{ event.organization }}</h3>
+                                <p class="event-description">{{ event.description }}</p>
+                                {% if event.button_link %}
+                                    <a href="{{ event.button_link }}" class="event-button" target="_blank">{{ event.button_text }}</a>
+                                {% else %}
+                                    <button class="event-button">{{ event.button_text }}</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- News Section -->
+            <div class="news-section" id="news">
+                <div class="news-container">
+                    <div class="news-tabs">
+                        <button class="news-tab active" data-tab="college">Навіны каледжа</button>
+                        <button class="news-tab second" data-tab="committee">Навіны камітэта</button>
+                        <button class="news-tab third" data-tab="ministry">Навіны Міністэрства</button>
+                    </div>
+                    
+                    <div class="news-content">
+                        <!-- College News Tab -->
+                        <div class="news-tab-content active" id="college-news">
+                            <div class="news-grid">
+                                {% for news in college_news %}
+                                <div class="news-card">
+                                    {% if news.image %}
+                                        <div class="news-image">
+                                            <img src="{{ news.image.url }}" alt="{{ news.title }}">
+                                        </div>
+                                    {% else %}
+                                        <div class="news-image-placeholder">
+                                            <div class="news-title-overlay">{{ news.title }}</div>
+                                        </div>
+                                    {% endif %}
+                                    <div class="news-content-card">
+                                        <p class="news-description">{{ news.description }}</p>
+                                        <div class="news-date">{{ news.created_at|date:"j F, l" }}</div>
+                                        {% if news.button_link %}
+                                            <button href="{{ news.button_link }}" class="news-button" target="_blank">{{ news.button_text }}</button>
+                                        {% else %}
+                                            <button class="news-button">{{ news.button_text }}</button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                
+                                <!-- "Все новости колледжа" card -->
+                                <div class="news-card all-news-card">
+                                    <div class="news-content">
+                                        <h3 class="all-news-title">Все новости колледжа</h3>
+                                        <button class="news-button">Смотреть</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Committee News Tab -->
+                        <div class="news-tab-content" id="committee-news">
+                            <div class="news-grid">
+                                {% for news in committee_news %}
+                                <div class="news-card">
+                                    {% if news.image %}
+                                        <div class="news-image">
+                                            <img src="{{ news.image.url }}" alt="{{ news.title }}">
+                                            <div class="news-title-overlay">{{ news.title }}</div>
+                                        </div>
+                                    {% else %}
+                                        <div class="news-image-placeholder">
+                                            <div class="news-title-overlay">{{ news.title }}</div>
+                                        </div>
+                                    {% endif %}
+                                    <div class="news-content">
+                                        <p class="news-description">{{ news.description }}</p>
+                                        <div class="news-date">{{ news.created_at|date:"j F, l" }}</div>
+                                        {% if news.button_link %}
+                                            <a href="{{ news.button_link }}" class="news-button" target="_blank">{{ news.button_text }}</a>
+                                        {% else %}
+                                            <button class="news-button">{{ news.button_text }}</button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                
+                                <!-- "Все новости комитета" card -->
+                                <div class="news-card all-news-card">
+                                    <div class="news-content">
+                                        <h3 class="all-news-title">Все новости комитета</h3>
+                                        <button class="news-button">Смотреть</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Ministry News Tab -->
+                        <div class="news-tab-content" id="ministry-news">
+                            <div class="news-grid">
+                                {% for news in ministry_news %}
+                                <div class="news-card">
+                                    {% if news.image %}
+                                        <div class="news-image">
+                                            <img src="{{ news.image.url }}" alt="{{ news.title }}">
+                                            <div class="news-title-overlay">{{ news.title }}</div>
+                                        </div>
+                                    {% else %}
+                                        <div class="news-image-placeholder">
+                                            <div class="news-title-overlay">{{ news.title }}</div>
+                                        </div>
+                                    {% endif %}
+                                    <div class="news-content">
+                                        <p class="news-description">{{ news.description }}</p>
+                                        <div class="news-date">{{ news.created_at|date:"j F, l" }}</div>
+                                        {% if news.button_link %}
+                                            <a href="{{ news.button_link }}" class="news-button" target="_blank">{{ news.button_text }}</a>
+                                        {% else %}
+                                            <button class="news-button">{{ news.button_text }}</button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                
+                                <!-- "Все новости Министерства" card -->
+                                <div class="news-card all-news-card">
+                                    <div class="news-content">
+                                        <h3 class="all-news-title">Все новости Министерства</h3>
+                                        <button class="news-button">Смотреть</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Footer -->
+            <div class="partners-container">
+    <div class="partners-track">
+        <div class="partners-grid">
+            <div class="partner-block">
+                <img src="{% static 'main/images/1.svg' %}" alt="" class="partner-img">
+            </div>
+            <div class="partner-block">
+                <img src="{% static 'main/images/2.svg' %}" alt="" class="partner-img">
+            </div>
+            <div class="partner-block">
+                <img src="{% static 'main/images/3.svg' %}" alt="" class="partner-img">
+            </div>
+            <div class="partner-block">
+                <img src="{% static 'main/images/4.svg' %}" alt="" class="partner-img">
+            </div>
+            <div class="partner-block">
+                <img src="{% static 'main/images/5.svg' %}" alt="" class="partner-img">
+            </div>
+            <div class="partner-block">
+                <img src="{% static 'main/images/6.svg' %}" alt="" class="partner-img">
+            </div>
+            <!-- Дублируем элементы для бесшовной анимации -->
+            <div class="partner-block">
+                <img src="{% static 'main/images/1.svg' %}" alt="" class="partner-img">
+            </div>
+            <div class="partner-block">
+                <img src="{% static 'main/images/2.svg' %}" alt="" class="partner-img">
+            </div>
+            <div class="partner-block">
+                <img src="{% static 'main/images/3.svg' %}" alt="" class="partner-img">
+            </div>
+            <div class="partner-block">
+                <img src="{% static 'main/images/4.svg' %}" alt="" class="partner-img">
+            </div>
+            <div class="partner-block">
+                <img src="{% static 'main/images/5.svg' %}" alt="" class="partner-img">
+            </div>
+            <div class="partner-block">
+                <img src="{% static 'main/images/6.svg' %}" alt="" class="partner-img">
+            </div>
+        </div>
+    </div>
+</div>
+            <footer class="footer">
+                <!-- Footer Info Section -->
+                <div class="footer-info">
+                    <div class="footer-info-container">
+                        <div class="footer-text">
+                            <p>УА "Мінскі дзяржаўны каледж лічбавых тэхналогій", 2025</p>
+                            <p>Адміністратар сайта: Картавенка Арцём, Галіцкі Максім</p>
+                            <p>Адрас: 220108, Рэспубліка Беларусь, г. Мінск, вул. Казінца, 91</p>
+                            <p>Тэлефон: +375 17 374 11 62</p>
+                            <p>E-mail: mscdt@minskedy.gov.by</p>
+                        </div>
+                        <div class="footer-social">
+                            <a href="#" class="social-icon telegram"><img src="{% static 'main/images/tg.svg' %}" alt=""></a>
+                            <a href="#" class="social-icon vk"><img src="{% static 'main/images/vk.svg' %}" alt=""></a>
+                            <a href="#" class="social-icon youtube"><img src="{% static 'main/images/yt.svg' %}" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+            
+            <script src="{% static 'main/scripts/progressbar.js' %}"></script>
+            <script src="{% static 'main/scripts/matrix.js' %}"></script>
+            <script src="{% static 'main/scripts/new.js' %}"></script>
+
+        </body>
+    </html>

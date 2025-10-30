@@ -1,0 +1,10 @@
+Django==5.2.6
+python-telegram-bot==22.5
+gunicorn==21.2.0
+psycopg2-binary==2.9.9
+whitenoise==6.6.0
+pillow==10.0.0
+python-decouple==3.8
+dj-database-url==2.1.0
+PySide6==6.7.3
+psutil==5.9.8

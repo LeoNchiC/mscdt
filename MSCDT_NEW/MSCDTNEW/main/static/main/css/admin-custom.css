@@ -1,0 +1,96 @@
+/* Admin UI themed to site variables */
+:root {
+  --admin-bg: var(--secondarygreen);
+  --admin-panel: var(--darkgreen);
+  --admin-accent: var(--progressbar);
+  --admin-text: var(--black);
+  --admin-card: #ffffff;
+}
+
+/* Reset some rough edges */
+* { box-sizing: border-box; }
+
+/* Header */
+#header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--admin-bg);
+  color: var(--admin-text);
+  border-bottom: 2px solid var(--admin-accent);
+}
+#header a:link, #header a:visited { color: var(--admin-text); }
+#site-name a { font-weight: 800; color: var(--admin-text); letter-spacing: .5px; }
+
+/* Page background */
+body.login, body {
+  background: var(--admin-panel);
+}
+
+/* Sidebar */
+.app-list, #content-related { position: sticky; top: 68px; }
+/* Hide inline "+ Add" shortcuts on index app list */
+.app-list .addlink { display: none !important; }
+
+/* Cards/modules */
+.module, .app-auth .module, .dashboard .module {
+  background: var(--admin-card);
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+}
+.module h2, .inline-group h2 { color: var(--admin-text); font-weight: 700; }
+
+/* Forms */
+input, select, textarea { border-radius: 12px !important; border-color: #d9e2d3; }
+.submit-row { position: sticky; bottom: 0; background: var(--admin-card); padding: 16px; box-shadow: 0 -8px 20px rgba(0,0,0,0.04); }
+
+/* Buttons */
+.button, input[type=submit], .submit-row input, .deletelink, a.button {
+  background: var(--admin-accent);
+  color: #fff !important;
+  border-radius: 100px;
+  border: none;
+  padding: 10px 18px;
+}
+.button:hover, input[type=submit]:hover, .submit-row input:hover, a.button:hover { filter: brightness(0.95); }
+
+/* Change list */
+.change-list .results, .change-list table { border-radius: 12px; overflow: hidden; }
+table thead th { background: var(--admin-bg); color: var(--admin-text); }
+table tbody tr:nth-child(even) { background: #f6f8f5; }
+.paginator { position: sticky; bottom: 0; background: var(--admin-card); padding: 8px 12px; border-radius: 12px; }
+
+/* Login */
+body.login #container { border-radius: 24px; box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+
+/* ========================= DARK THEME ========================= */
+/* Auto: respect OS dark mode; Manual: [data-theme="dark"] on html or body */
+/* Default to dark theme */
+html, body {
+  --admin-bg: #2a2c30;
+  --admin-panel: #17181b;
+  --admin-accent: #95B88A;
+  --admin-text: #f5f6f7;
+  --admin-card: #1e1f22;
+  background: var(--admin-panel);
+  color: var(--admin-text);
+}
+
+#header { border-bottom-color: var(--admin-accent); }
+
+.module,
+.dashboard .module {
+  background: var(--admin-card);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.45);
+}
+
+input,
+select,
+textarea {
+  background:#101114; color:#dfe1e4; border-color:#2e3238;
+}
+table thead th { background:#26292e; color:#e9eaec; }
+table tbody tr:nth-child(even) { background:#1a1c20; }
+
+.paginator,
+.submit-row { background:#1e1f22; box-shadow: 0 -8px 20px rgba(0,0,0,0.5); }
+
